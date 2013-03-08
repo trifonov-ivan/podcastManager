@@ -7,12 +7,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "PodcastManager/podcastEngine/PodcastInfoCell.m"
-         timestampString = "384449474.674907"
+         filePath = "PodcastManager/podcastEngine/PodcastEngine.m"
+         timestampString = "384455113.381875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "24"
-         endingLineNumber = "24"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -20,78 +20,52 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "PodcastManager/podcastEngine/PodcastInfoCell.m"
-         timestampString = "384449475.544234"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "15"
-         endingLineNumber = "15"
-         landmarkName = "-initWithStyle:reuseIdentifier:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "PodcastManager/podcastEngine/PodcastInfoCell.m"
-         timestampString = "384449594.308891"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "33"
-         endingLineNumber = "33"
-         landmarkName = "-initWithCoder:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "PodcastManager/podcastEngine/PodcastInfoCell.m"
-         timestampString = "384449606.889544"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "43"
-         endingLineNumber = "43"
-         landmarkName = "-initWithFrame:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "PodcastManager/podcastEngine/PodcastInfoCell.m"
-         timestampString = "384450250.751835"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "81"
-         endingLineNumber = "81"
-         landmarkName = "-buttonPressed:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "PodcastManager/podcastEngine/PodcastEngine.m"
-         timestampString = "384450360.297218"
+         timestampString = "384455113.381875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "199"
-         endingLineNumber = "199"
-         landmarkName = "-startPlayingPodcast:local:downloading:"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
+         landmarkName = "-storeChanges"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "PodcastManager/podcastEngine/PodcastEngine.m"
-         timestampString = "384450348.617447"
+         filePath = "PodcastManager/podcastEngine/PodcastInfoCell.m"
+         timestampString = "384456156.75141"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "28"
-         endingLineNumber = "28"
-         landmarkName = "-dealloc"
+         startingLineNumber = "125"
+         endingLineNumber = "125"
+         landmarkName = "-updateDuration:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PodcastManager/podcastEngine/PodcastInfoCell.m"
+         timestampString = "384456206.59149"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "98"
+         endingLineNumber = "98"
+         landmarkName = "-downChecked:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PodcastManager/podcastEngine/PodcastInfoCell.m"
+         timestampString = "384456225.844579"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "107"
+         endingLineNumber = "107"
+         landmarkName = "-setPlayingState:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
