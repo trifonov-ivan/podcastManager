@@ -19,6 +19,16 @@
 		208EA3D916EA039700AF06CE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA3D816EA039700AF06CE /* ViewController.m */; };
 		208EA3DC16EA039700AF06CE /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208EA3DA16EA039700AF06CE /* ViewController_iPhone.xib */; };
 		208EA3DF16EA039700AF06CE /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208EA3DD16EA039700AF06CE /* ViewController_iPad.xib */; };
+		208EA3EA16EA048000AF06CE /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA3E716EA048000AF06CE /* AudioStreamer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		208EA3EB16EA048000AF06CE /* PodcastEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA3E916EA048000AF06CE /* PodcastEngine.m */; };
+		208EA3F816EA051100AF06CE /* SMEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA3EF16EA051100AF06CE /* SMEvent.m */; };
+		208EA3F916EA051100AF06CE /* SMEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA3F116EA051100AF06CE /* SMEventDispatcher.m */; };
+		208EA3FA16EA051100AF06CE /* SMEventNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA3F316EA051100AF06CE /* SMEventNotifier.m */; };
+		208EA3FC16EA051100AF06CE /* SMTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA3F716EA051100AF06CE /* SMTimer.m */; };
+		208EA3FE16EA05ED00AF06CE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208EA3FD16EA05ED00AF06CE /* AudioToolbox.framework */; };
+		208EA40016EA05FA00AF06CE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208EA3FF16EA05FA00AF06CE /* CFNetwork.framework */; };
+		208EA40216EA060100AF06CE /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208EA40116EA060100AF06CE /* CoreAudio.framework */; };
+		208EA40416EA060500AF06CE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208EA40316EA060500AF06CE /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +49,22 @@
 		208EA3D816EA039700AF06CE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		208EA3DB16EA039700AF06CE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		208EA3DE16EA039700AF06CE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		208EA3E616EA048000AF06CE /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
+		208EA3E716EA048000AF06CE /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
+		208EA3E816EA048000AF06CE /* PodcastEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastEngine.h; sourceTree = "<group>"; };
+		208EA3E916EA048000AF06CE /* PodcastEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastEngine.m; sourceTree = "<group>"; };
+		208EA3EE16EA051100AF06CE /* SMEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMEvent.h; sourceTree = "<group>"; };
+		208EA3EF16EA051100AF06CE /* SMEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMEvent.m; sourceTree = "<group>"; };
+		208EA3F016EA051100AF06CE /* SMEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMEventDispatcher.h; sourceTree = "<group>"; };
+		208EA3F116EA051100AF06CE /* SMEventDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMEventDispatcher.m; sourceTree = "<group>"; };
+		208EA3F216EA051100AF06CE /* SMEventNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMEventNotifier.h; sourceTree = "<group>"; };
+		208EA3F316EA051100AF06CE /* SMEventNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMEventNotifier.m; sourceTree = "<group>"; };
+		208EA3F616EA051100AF06CE /* SMTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTimer.h; sourceTree = "<group>"; };
+		208EA3F716EA051100AF06CE /* SMTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTimer.m; sourceTree = "<group>"; };
+		208EA3FD16EA05ED00AF06CE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		208EA3FF16EA05FA00AF06CE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		208EA40116EA060100AF06CE /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		208EA40316EA060500AF06CE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +72,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				208EA40416EA060500AF06CE /* AVFoundation.framework in Frameworks */,
+				208EA40216EA060100AF06CE /* CoreAudio.framework in Frameworks */,
+				208EA40016EA05FA00AF06CE /* CFNetwork.framework in Frameworks */,
+				208EA3FE16EA05ED00AF06CE /* AudioToolbox.framework in Frameworks */,
 				208EA3C016EA039700AF06CE /* UIKit.framework in Frameworks */,
 				208EA3C216EA039700AF06CE /* Foundation.framework in Frameworks */,
 				208EA3C416EA039700AF06CE /* CoreGraphics.framework in Frameworks */,
@@ -75,6 +105,10 @@
 		208EA3BE16EA039700AF06CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				208EA40316EA060500AF06CE /* AVFoundation.framework */,
+				208EA40116EA060100AF06CE /* CoreAudio.framework */,
+				208EA3FF16EA05FA00AF06CE /* CFNetwork.framework */,
+				208EA3FD16EA05ED00AF06CE /* AudioToolbox.framework */,
 				208EA3BF16EA039700AF06CE /* UIKit.framework */,
 				208EA3C116EA039700AF06CE /* Foundation.framework */,
 				208EA3C316EA039700AF06CE /* CoreGraphics.framework */,
@@ -85,6 +119,8 @@
 		208EA3C516EA039700AF06CE /* PodcastManager */ = {
 			isa = PBXGroup;
 			children = (
+				208EA3ED16EA051000AF06CE /* eventDispatcher */,
+				208EA3E516EA048000AF06CE /* podcastEngine */,
 				208EA3CE16EA039700AF06CE /* AppDelegate.h */,
 				208EA3CF16EA039700AF06CE /* AppDelegate.m */,
 				208EA3D716EA039700AF06CE /* ViewController.h */,
@@ -108,6 +144,32 @@
 				208EA3D516EA039700AF06CE /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		208EA3E516EA048000AF06CE /* podcastEngine */ = {
+			isa = PBXGroup;
+			children = (
+				208EA3E616EA048000AF06CE /* AudioStreamer.h */,
+				208EA3E716EA048000AF06CE /* AudioStreamer.m */,
+				208EA3E816EA048000AF06CE /* PodcastEngine.h */,
+				208EA3E916EA048000AF06CE /* PodcastEngine.m */,
+			);
+			path = podcastEngine;
+			sourceTree = "<group>";
+		};
+		208EA3ED16EA051000AF06CE /* eventDispatcher */ = {
+			isa = PBXGroup;
+			children = (
+				208EA3EE16EA051100AF06CE /* SMEvent.h */,
+				208EA3EF16EA051100AF06CE /* SMEvent.m */,
+				208EA3F016EA051100AF06CE /* SMEventDispatcher.h */,
+				208EA3F116EA051100AF06CE /* SMEventDispatcher.m */,
+				208EA3F216EA051100AF06CE /* SMEventNotifier.h */,
+				208EA3F316EA051100AF06CE /* SMEventNotifier.m */,
+				208EA3F616EA051100AF06CE /* SMTimer.h */,
+				208EA3F716EA051100AF06CE /* SMTimer.m */,
+			);
+			path = eventDispatcher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +242,12 @@
 				208EA3CC16EA039700AF06CE /* main.m in Sources */,
 				208EA3D016EA039700AF06CE /* AppDelegate.m in Sources */,
 				208EA3D916EA039700AF06CE /* ViewController.m in Sources */,
+				208EA3EA16EA048000AF06CE /* AudioStreamer.m in Sources */,
+				208EA3EB16EA048000AF06CE /* PodcastEngine.m in Sources */,
+				208EA3F816EA051100AF06CE /* SMEvent.m in Sources */,
+				208EA3F916EA051100AF06CE /* SMEventDispatcher.m in Sources */,
+				208EA3FA16EA051100AF06CE /* SMEventNotifier.m in Sources */,
+				208EA3FC16EA051100AF06CE /* SMTimer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +380,7 @@
 				208EA3E416EA039700AF06CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
