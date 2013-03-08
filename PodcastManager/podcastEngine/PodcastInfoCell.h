@@ -10,9 +10,7 @@
 
 @class PodcastViewController;
 @interface PodcastInfoCell : UITableViewCell
-{
-    BOOL playingState;
-}
+
 @property (nonatomic,strong) IBOutlet UILabel *name;
 @property (nonatomic,strong) IBOutlet UILabel *duration;
 @property (nonatomic,strong) IBOutlet UILabel *state;
@@ -22,6 +20,8 @@
 
 @property (nonatomic) PodcastViewController *controller;
 @property (nonatomic,strong) NSDictionary *currentData;
+@property (nonatomic,readwrite) BOOL playingState;
+
 -(IBAction)buttonPressed:(id)sender;
 -(IBAction)downChecked:(id)sender;
 -(IBAction)localChecked:(id)sender;

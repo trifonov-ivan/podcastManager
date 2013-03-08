@@ -56,7 +56,7 @@
 
 -(void)setup
 {
-    playingState = NO;
+    self.playingState = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(otherPlayed:) name:PodcastPlayButtonClicked object:nil];
 }
 
@@ -69,36 +69,46 @@
 {
     if ([_currentData[@"name"] isEqualToString:ntf.object])
     {
-        playingState = YES;
+        self.playingState = YES;
         [_playBtn setTitle:@"stop" forState:UIControlStateNormal];
     }
     else
     {
-        playingState = NO;
+        self.playingState = NO;
         [_playBtn setTitle:@"play" forState:UIControlStateNormal];
     }
 }
 
 -(IBAction)buttonPressed:(id)sender
 {
-    if (!playingState)
+    if (!self.playingState)
     {
         [self.controller playClickedFor:_currentData[@"name"] local:_local.on download:_downloadable.on];
     }
     else
     {
-        playingState = NO;
+        self.playingState = NO;
         [_playBtn setTitle:@"play" forState:UIControlStateNormal];
         [self.controller stopClickedFor:_currentData[@"name"]];
     }
 }
 -(IBAction)downChecked:(id)sender
 {
-    
+    _local.enabled = !_downloadable.enabled;
 }
 -(IBAction)localChecked:(id)sender
 {
-    
+    _downloadable.enabled = !_local.on;
+}
+
+-(void) setPlayingState:(BOOL)playingState
+{
+    _playingState = playingState;
+    if (playingState)
+    {
+        _local.enabled = NO;
+        _downloadable.enabled = NO;
+    }
 }
 -(void) updateAccordingToData:(NSDictionary*)data
 {
