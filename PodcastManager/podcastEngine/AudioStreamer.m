@@ -1980,6 +1980,18 @@ cleanup:
     mAudioFile = NULL;
 }
 
+- (double)recordedDuration
+{
+    if (!self.isWritingToFile)
+        return 0;
+    NSTimeInterval seconds;
+    UInt32 propertySize = sizeof (seconds);
+    AudioFileGetProperty (mAudioFile,
+                                   kAudioFilePropertyEstimatedDuration,
+                                   &propertySize,
+                                   &seconds);
+    return seconds;
+}
 
 @end
 

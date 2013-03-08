@@ -29,9 +29,14 @@ static PodcastEngine * sharedEngine = nil;
     if (self) {
         NSString *pListPath = [[NSBundle mainBundle] pathForResource:@"podcasts" ofType:@"plist"];
         podcastsDict = [NSMutableDictionary dictionaryWithContentsOfFile:pListPath];
-    
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willDie:) name:UIApplicationWillTerminateNotification object:[UIApplication sharedApplication]];
     }
     return self;
+}
+
+-(void) willDie:(NSNotification*) ntf
+{
+    [self endCurrentPodcast];
 }
 
 - (void) storeChanges
@@ -68,10 +73,68 @@ static PodcastEngine * sharedEngine = nil;
     return [podcastsDict allKeys];
 }
 
+- (NSMutableDictionary*) getInitialPodcastInfo:(NSString*) podcast
+{
+    NSDictionary *dict = podcastsDict[podcast];
+    return [NSMutableDictionary dictionaryWithDictionary:@{
+             @"name":dict[@"local"][@"name"],
+             @"availability":@0,
+             @"localtime":@(0)
+             }];
+}
+
+- (double) durationOfFileByPath:(NSString*) path
+{
+    NSTimeInterval length = 0.0;
+    NSURL *audioURL = [NSURL fileURLWithPath: path];
+    
+    OSStatus result = noErr;
+    
+    AudioFileID audioFile = NULL;
+    result = AudioFileOpenURL ((__bridge CFURLRef)audioURL,
+                               kAudioFileReadPermission,
+                               0, // hint
+                               &audioFile);
+    if (result != noErr) goto bailout;
+    
+    //Get file length
+    NSTimeInterval seconds;
+    UInt32 propertySize = sizeof (seconds);
+    result = AudioFileGetProperty (audioFile,
+                                   kAudioFilePropertyEstimatedDuration,
+                                   &propertySize,
+                                   &seconds);
+    if (result != noErr) goto bailout;
+    
+    length = seconds;
+    
+bailout:
+    if (audioFile) AudioFileClose (audioFile);
+    return length;
+}
+
 - (double) podcastLocalLength:(NSString*) podcast
 {
     if (!podcastsDict[podcast])
         return 0;
+}
+
+-(NSString*) getSoundForPodcast:(NSString*)podcast withNumber:(int)number
+{
+    NSDictionary *dict = podcastsDict[podcast][@"local"];
+    NSString *name = dict[@"name"];
+    int limit = [dict[@"limit"] intValue];
+    if (!name || !limit) return nil;
+
+    NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *folder = [cachesFolder stringByAppendingPathComponent:@"Podcasts"];
+    NSString *filePath = [folder stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d",name,number]];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:filePath isDirectory:nil])
+    {
+        return filePath;
+    }
+    return nil;
 }
 
 - (NSURL*) getRandomSoundForPodcast:(NSString*) podcast
@@ -81,20 +144,7 @@ static PodcastEngine * sharedEngine = nil;
     int limit = [dict[@"limit"] intValue];
     if (!name || !limit) return nil;
 
-    NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *folder = [cachesFolder stringByAppendingPathComponent:@"Podcasts"];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:folder isDirectory:YES])
-    {
-        [fileManager createDirectoryAtPath:folder withIntermediateDirectories:NO attributes:nil error:nil];
-    }
-    
-    NSString *filePath = [folder stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d",name,arc4random()%limit]];
-    if ([fileManager fileExistsAtPath:filePath isDirectory:nil])
-    {
-        return [NSURL fileURLWithPath:filePath];
-    }
-    return nil;
+    return [NSURL URLWithString:[self getSoundForPodcast:podcast withNumber:arc4random()%limit]];
 }
 
 - (NSString*) getFilePathForNextFileForPodcast:(NSString*)podcast
@@ -170,6 +220,7 @@ static PodcastEngine * sharedEngine = nil;
     
     if (!playURL) return NO;
     
+    currentPodcast = podcast;
     if (!local)
     {
         streamer = [[AudioStreamer alloc] initWithURL:playURL];
@@ -208,11 +259,13 @@ static PodcastEngine * sharedEngine = nil;
 
 - (void) endCurrentPodcast
 {
-    [self storeChanges];
     if (streamer)
     {
         if (down)
+        {
+            podcastsDict[currentPodcast][@"local"][@"duration"] = @([podcastsDict[currentPodcast][@"local"][@"duration"] doubleValue] + [streamer recordedDuration]);
             [streamer endRecord];
+        }
         [streamer stop];
         streamer = nil;
     }
@@ -221,9 +274,14 @@ static PodcastEngine * sharedEngine = nil;
         [filePlayer stop];
         filePlayer = nil;
     }
+    currentPodcast = nil;
+    [self storeChanges];
 }
 
-
+- (double) durationOfCurrentPodcast
+{
+    return [podcastsDict[currentPodcast][@"local"][@"duration"] doubleValue] + [streamer recordedDuration];
+}
 
 -(void) playPodcast:(NSString*)path
 {

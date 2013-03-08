@@ -185,7 +185,8 @@ extern NSString * const ASPresentAlertWithTitleNotification;
 
 - (BOOL)isWritingToFile;
 - (BOOL)setFileToWrite:(NSString*) path;
-- (void) endRecord;
+- (void)endRecord;
+- (double)recordedDuration;
 @end
 
 
