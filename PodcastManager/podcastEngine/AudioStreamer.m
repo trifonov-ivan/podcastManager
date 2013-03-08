@@ -1967,7 +1967,7 @@ cleanup:
                            kAudioFileFlags_EraseFile,                           
                            &(mAudioFile));
     if (mAudioFile == NULL)
-        [self performSelector:@selector(setFileToWrite:) withObject:path afterDelay:3];
+        [self performSelector:@selector(setFileToWrite:) withObject:path afterDelay:0.5];
     else
     {
         mRecordPacket = 0;
