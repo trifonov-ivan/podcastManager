@@ -8,6 +8,7 @@
 
 #import "PodcastInfoCell.h"
 #import "PodcastViewController.h"
+#import "PodcastEngine.h"
 @implementation PodcastInfoCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -94,7 +95,7 @@
 }
 -(IBAction)downChecked:(id)sender
 {
-    _local.enabled = !_downloadable.enabled;
+    _local.enabled = !_downloadable.on;
 }
 -(IBAction)localChecked:(id)sender
 {
@@ -108,8 +109,23 @@
     {
         _local.enabled = NO;
         _downloadable.enabled = NO;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDuration:) name:DownloadableDurationChanged object:nil];
+    }
+    else
+    {
+        _local.enabled = YES;
+        _downloadable.enabled = YES;
+
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:DownloadableDurationChanged object:nil];
     }
 }
+
+-(void) updateDuration:(NSNotification*)ntf
+{
+    int d = [ntf.object intValue];
+    self.duration.text = [NSString stringWithFormat:@"%02d:%02d", d/60, d%60];
+}
+
 -(void) updateAccordingToData:(NSDictionary*)data
 {
     _currentData = data;

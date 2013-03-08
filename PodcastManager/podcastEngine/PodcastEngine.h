@@ -11,6 +11,9 @@
 #import "SMTimer.h"
 #import "AudioStreamer.h"
 #import <AVFoundation/AVFoundation.h>
+
+#define DownloadableDurationChanged @"downloadable_duration_changed"
+
 @class SMTimer;
 @class AVAudioPlayer;
 @interface PodcastEngine : SMEventDispatcher <AVAudioPlayerDelegate>

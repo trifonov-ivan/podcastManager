@@ -19,6 +19,7 @@ static PodcastEngine * sharedEngine = nil;
 	@synchronized(self)     {
 		if (!sharedEngine)
 			sharedEngine = [[PodcastEngine alloc] init];
+        
 	}
 	return sharedEngine;
 }
@@ -44,6 +45,10 @@ static PodcastEngine * sharedEngine = nil;
         
         podcastsDict = [NSMutableDictionary dictionaryWithContentsOfFile:filePath];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willDie:) name:UIApplicationWillTerminateNotification object:[UIApplication sharedApplication]];
+        
+        timer = [[SMTimer alloc] init];
+        timer.rate = 0.2;
+        [timer addListener:self method:@selector(checkDuration:)];
     }
     return self;
 }
@@ -242,6 +247,7 @@ bailout:
     {
         filePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL error:nil];
         filePlayer.delegate = self;
+        filePlayer.volume = 0;
         [filePlayer play];
         return YES;
     }
@@ -289,6 +295,31 @@ bailout:
 - (double) durationOfCurrentPodcast
 {
     return [podcastsDict[currentPodcast][@"local"][@"duration"] doubleValue] + [streamer recordedDuration];
+}
+
+-(void) checkDuration:(SMEvent*) event
+{
+    if (down)
+    {
+        double a = [self durationOfCurrentPodcast];
+        [[NSNotificationCenter defaultCenter] postNotificationName:DownloadableDurationChanged object:@(a)];
+    }
+    
+    if (filePlayer)
+    {
+        if (filePlayer.duration-filePlayer.currentTime<4)
+        {
+            filePlayer.volume -=0.05;
+        }
+        else
+        {
+            if (filePlayer.volume < 1)
+            {
+                filePlayer.volume +=0.05;
+            }
+        }
+    }
+
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
