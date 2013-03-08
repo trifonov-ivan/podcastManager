@@ -17,10 +17,16 @@
     SMTimer * timer;
     AudioStreamer *streamer;
     AVAudioPlayer *filePlayer;
+    NSDictionary *podcastsDict;
+    BOOL local,down;
 }
 
 + (PodcastEngine *) sharedEngine;
 
-- (void) testPodcastForAvailability:(NSString*) podcastURL;
-
+- (void) testPodcastForAvailability:(NSString*) podcast target:(id)target method:(SEL)method;
+- (double) podcastLocalLength:(NSString*) podcast;
+- (BOOL) startPlayingPodcast:(NSString*) podcast local:(BOOL)locally downloading:(BOOL)downloading;
+- (void) pause;
+- (void) play;
+- (void) endCurrentPodcast;
 @end

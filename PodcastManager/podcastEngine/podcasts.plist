@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Dub</key>
+	<dict>
+		<key>remote</key>
+		<string>http://www.partyvibe.com:8000</string>
+		<key>local</key>
+		<dict>
+			<key>name</key>
+			<string>dub</string>
+			<key>limit</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>Rock</key>
+	<dict>
+		<key>remote</key>
+		<string>http://stream01.noisefm.pl:8000/</string>
+		<key>local</key>
+		<dict>
+			<key>name</key>
+			<string>rock</string>
+			<key>limit</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>Fortepiano</key>
+	<dict>
+		<key>remote</key>
+		<string>http://188.127.226.185/;stream.nsv?45</string>
+		<key>local</key>
+		<dict>
+			<key>name</key>
+			<string>piano</string>
+			<key>limit</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+</dict>
+</plist>

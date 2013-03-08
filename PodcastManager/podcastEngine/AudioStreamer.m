@@ -1971,9 +1971,7 @@ cleanup:
     else
     {
         mRecordPacket = 0;
-    }
-    [self performSelector:@selector(endRecord) withObject:nil afterDelay:10];
-    
+    }    
 }
 
 -(void) endRecord

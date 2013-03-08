@@ -29,6 +29,7 @@
 		208EA40016EA05FA00AF06CE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208EA3FF16EA05FA00AF06CE /* CFNetwork.framework */; };
 		208EA40216EA060100AF06CE /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208EA40116EA060100AF06CE /* CoreAudio.framework */; };
 		208EA40416EA060500AF06CE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208EA40316EA060500AF06CE /* AVFoundation.framework */; };
+		208EA40716EA0EC900AF06CE /* podcasts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 208EA40616EA0EC900AF06CE /* podcasts.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		208EA3FF16EA05FA00AF06CE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		208EA40116EA060100AF06CE /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		208EA40316EA060500AF06CE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		208EA40616EA0EC900AF06CE /* podcasts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = podcasts.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 		208EA3E516EA048000AF06CE /* podcastEngine */ = {
 			isa = PBXGroup;
 			children = (
+				208EA40516EA0EAF00AF06CE /* Initial settings */,
 				208EA3E616EA048000AF06CE /* AudioStreamer.h */,
 				208EA3E716EA048000AF06CE /* AudioStreamer.m */,
 				208EA3E816EA048000AF06CE /* PodcastEngine.h */,
@@ -170,6 +173,14 @@
 				208EA3F716EA051100AF06CE /* SMTimer.m */,
 			);
 			path = eventDispatcher;
+			sourceTree = "<group>";
+		};
+		208EA40516EA0EAF00AF06CE /* Initial settings */ = {
+			isa = PBXGroup;
+			children = (
+				208EA40616EA0EC900AF06CE /* podcasts.plist */,
+			);
+			name = "Initial settings";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +240,7 @@
 				208EA3D616EA039700AF06CE /* Default-568h@2x.png in Resources */,
 				208EA3DC16EA039700AF06CE /* ViewController_iPhone.xib in Resources */,
 				208EA3DF16EA039700AF06CE /* ViewController_iPad.xib in Resources */,
+				208EA40716EA0EC900AF06CE /* podcasts.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
