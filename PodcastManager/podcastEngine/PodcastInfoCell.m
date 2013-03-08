@@ -56,6 +56,7 @@
 
 -(void)setup
 {
+    playingState = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(otherPlayed:) name:PodcastPlayButtonClicked object:nil];
 }
 
@@ -68,17 +69,28 @@
 {
     if ([_currentData[@"name"] isEqualToString:ntf.object])
     {
+        playingState = YES;
         [_playBtn setTitle:@"stop" forState:UIControlStateNormal];
     }
     else
     {
+        playingState = NO;
         [_playBtn setTitle:@"play" forState:UIControlStateNormal];
     }
 }
 
 -(IBAction)buttonPressed:(id)sender
 {
-    [self.controller playClickedFor:_currentData[@"name"]];
+    if (!playingState)
+    {
+        [self.controller playClickedFor:_currentData[@"name"] local:_local.on download:_downloadable.on];
+    }
+    else
+    {
+        playingState = NO;
+        [_playBtn setTitle:@"play" forState:UIControlStateNormal];
+        [self.controller stopClickedFor:_currentData[@"name"]];
+    }
 }
 -(IBAction)downChecked:(id)sender
 {

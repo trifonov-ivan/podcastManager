@@ -17,4 +17,5 @@
 }
 
 -(void)playClickedFor:(NSString*)name local:(BOOL)local download:(BOOL)download;
+-(void)stopClickedFor:(NSString*)name;
 @end

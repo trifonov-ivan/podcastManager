@@ -10,7 +10,9 @@
 
 @class PodcastViewController;
 @interface PodcastInfoCell : UITableViewCell
-
+{
+    BOOL playingState;
+}
 @property (nonatomic,strong) IBOutlet UILabel *name;
 @property (nonatomic,strong) IBOutlet UILabel *duration;
 @property (nonatomic,strong) IBOutlet UILabel *state;
