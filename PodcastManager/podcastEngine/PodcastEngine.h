@@ -10,9 +10,10 @@
 #import <Foundation/Foundation.h>
 #import "SMTimer.h"
 #import "AudioStreamer.h"
+#import <AVFoundation/AVFoundation.h>
 @class SMTimer;
 @class AVAudioPlayer;
-@interface PodcastEngine : SMEventDispatcher
+@interface PodcastEngine : SMEventDispatcher <AVAudioPlayerDelegate>
 {
     SMTimer * timer;
     AudioStreamer *streamer;

@@ -31,8 +31,18 @@ static PodcastEngine * sharedEngine = nil;
 {
     self = [super init];
     if (self) {
-        NSString *pListPath = [[NSBundle mainBundle] pathForResource:@"podcasts" ofType:@"plist"];
-        podcastsDict = [NSMutableDictionary dictionaryWithContentsOfFile:pListPath];
+        
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+        NSString *filePath = [cachesFolder stringByAppendingPathComponent:@"podcasts.plist"];
+
+        if (![fm fileExistsAtPath:filePath])
+        {
+            NSString *alterFilePath = [[NSBundle mainBundle] pathForResource:@"podcasts" ofType:@"plist"];
+            [fm copyItemAtPath:alterFilePath toPath:filePath error:nil];
+        }
+        
+        podcastsDict = [NSMutableDictionary dictionaryWithContentsOfFile:filePath];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willDie:) name:UIApplicationWillTerminateNotification object:[UIApplication sharedApplication]];
     }
     return self;
@@ -45,9 +55,10 @@ static PodcastEngine * sharedEngine = nil;
 
 - (void) storeChanges
 {
-    NSString *pListPath = [[NSBundle mainBundle] pathForResource:@"podcasts" ofType:@"plist"];
-    NSData *data = [NSPropertyListSerialization dataWithPropertyList:podcastsDict format:NSPropertyListXMLFormat_v1_0 options:0 error:nil];
-    [data writeToFile:pListPath atomically:YES];
+    NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *filePath = [cachesFolder stringByAppendingPathComponent:@"podcasts.plist"];
+    NSURL *url = [NSURL fileURLWithPath:filePath];
+    [podcastsDict writeToURL:url atomically:YES];
 }
 
 - (void) testPodcastForAvailability:(NSString*) podcast target:(id)target method:(SEL)method
@@ -148,7 +159,7 @@ bailout:
     int limit = [dict[@"limit"] intValue];
     if (!name || !limit) return nil;
 
-    return [NSURL URLWithString:[self getSoundForPodcast:podcast withNumber:arc4random()%limit]];
+    return [NSURL fileURLWithPath:[self getSoundForPodcast:podcast withNumber:arc4random()%limit]];
 }
 
 - (NSString*) getFilePathForNextFileForPodcast:(NSString*)podcast
@@ -156,12 +167,12 @@ bailout:
     NSDictionary *dict = podcastsDict[podcast][@"local"];
     NSString *name = dict[@"name"];
     int limit = [dict[@"limit"] intValue];
-    if (!name || !limit) return nil;
+    if (!name) return nil;
     
     NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
     NSString *folder = [cachesFolder stringByAppendingPathComponent:@"Podcasts"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:folder isDirectory:YES])
+    if (![fileManager fileExistsAtPath:folder isDirectory:nil])
     {
         [fileManager createDirectoryAtPath:folder withIntermediateDirectories:NO attributes:nil error:nil];
     }
@@ -230,6 +241,7 @@ bailout:
     else
     {
         filePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL error:nil];
+        filePlayer.delegate = self;
         [filePlayer play];
         return YES;
     }
@@ -279,28 +291,12 @@ bailout:
     return [podcastsDict[currentPodcast][@"local"][@"duration"] doubleValue] + [streamer recordedDuration];
 }
 
--(void) playPodcast:(NSString*)path
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *file = [cachesFolder stringByAppendingPathComponent:@"testfile.mp3"];
-    
-    NSURL *audioUrl= nil;//[NSURL URLWithString:path];
-    if (audioUrl)
+    if (player == filePlayer)
     {
-    streamer = [[AudioStreamer alloc] initWithURL:audioUrl];
-
-    [streamer setFileToWrite:file];
-    [streamer start];
-        
+        [self startPlayingPodcast:currentPodcast local:local downloading:down];
     }
-    else
-    {
-        audioUrl = [NSURL fileURLWithPath:file];
-        filePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioUrl error:nil];
-        [filePlayer setNumberOfLoops:-1];
-        [filePlayer play];
-    }
-    
 }
 
 @end
