@@ -30,6 +30,10 @@
 		208EA40216EA060100AF06CE /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208EA40116EA060100AF06CE /* CoreAudio.framework */; };
 		208EA40416EA060500AF06CE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208EA40316EA060500AF06CE /* AVFoundation.framework */; };
 		208EA40716EA0EC900AF06CE /* podcasts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 208EA40616EA0EC900AF06CE /* podcasts.plist */; };
+		208EA40916EA16B300AF06CE /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208EA40816EA16B300AF06CE /* MediaPlayer.framework */; };
+		208EA40C16EA1C0C00AF06CE /* PodcastTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA40B16EA1C0B00AF06CE /* PodcastTester.m */; };
+		208EA41116EA24AC00AF06CE /* PodcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA40F16EA24AC00AF06CE /* PodcastViewController.m */; };
+		208EA41216EA24AC00AF06CE /* PodcastViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208EA41016EA24AC00AF06CE /* PodcastViewController_iPhone.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +71,12 @@
 		208EA40116EA060100AF06CE /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		208EA40316EA060500AF06CE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		208EA40616EA0EC900AF06CE /* podcasts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = podcasts.plist; sourceTree = "<group>"; };
+		208EA40816EA16B300AF06CE /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		208EA40A16EA1C0B00AF06CE /* PodcastTester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastTester.h; sourceTree = "<group>"; };
+		208EA40B16EA1C0B00AF06CE /* PodcastTester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastTester.m; sourceTree = "<group>"; };
+		208EA40E16EA24AC00AF06CE /* PodcastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastViewController.h; sourceTree = "<group>"; };
+		208EA40F16EA24AC00AF06CE /* PodcastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastViewController.m; sourceTree = "<group>"; };
+		208EA41016EA24AC00AF06CE /* PodcastViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PodcastViewController_iPhone.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				208EA40916EA16B300AF06CE /* MediaPlayer.framework in Frameworks */,
 				208EA40416EA060500AF06CE /* AVFoundation.framework in Frameworks */,
 				208EA40216EA060100AF06CE /* CoreAudio.framework in Frameworks */,
 				208EA40016EA05FA00AF06CE /* CFNetwork.framework in Frameworks */,
@@ -107,6 +118,7 @@
 		208EA3BE16EA039700AF06CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				208EA40816EA16B300AF06CE /* MediaPlayer.framework */,
 				208EA40316EA060500AF06CE /* AVFoundation.framework */,
 				208EA40116EA060100AF06CE /* CoreAudio.framework */,
 				208EA3FF16EA05FA00AF06CE /* CFNetwork.framework */,
@@ -151,11 +163,14 @@
 		208EA3E516EA048000AF06CE /* podcastEngine */ = {
 			isa = PBXGroup;
 			children = (
+				208EA40D16EA248A00AF06CE /* view controller */,
 				208EA40516EA0EAF00AF06CE /* Initial settings */,
 				208EA3E616EA048000AF06CE /* AudioStreamer.h */,
 				208EA3E716EA048000AF06CE /* AudioStreamer.m */,
 				208EA3E816EA048000AF06CE /* PodcastEngine.h */,
 				208EA3E916EA048000AF06CE /* PodcastEngine.m */,
+				208EA40A16EA1C0B00AF06CE /* PodcastTester.h */,
+				208EA40B16EA1C0B00AF06CE /* PodcastTester.m */,
 			);
 			path = podcastEngine;
 			sourceTree = "<group>";
@@ -181,6 +196,16 @@
 				208EA40616EA0EC900AF06CE /* podcasts.plist */,
 			);
 			name = "Initial settings";
+			sourceTree = "<group>";
+		};
+		208EA40D16EA248A00AF06CE /* view controller */ = {
+			isa = PBXGroup;
+			children = (
+				208EA40E16EA24AC00AF06CE /* PodcastViewController.h */,
+				208EA40F16EA24AC00AF06CE /* PodcastViewController.m */,
+				208EA41016EA24AC00AF06CE /* PodcastViewController_iPhone.xib */,
+			);
+			name = "view controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +266,7 @@
 				208EA3DC16EA039700AF06CE /* ViewController_iPhone.xib in Resources */,
 				208EA3DF16EA039700AF06CE /* ViewController_iPad.xib in Resources */,
 				208EA40716EA0EC900AF06CE /* podcasts.plist in Resources */,
+				208EA41216EA24AC00AF06CE /* PodcastViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +286,8 @@
 				208EA3F916EA051100AF06CE /* SMEventDispatcher.m in Sources */,
 				208EA3FA16EA051100AF06CE /* SMEventNotifier.m in Sources */,
 				208EA3FC16EA051100AF06CE /* SMTimer.m in Sources */,
+				208EA40C16EA1C0C00AF06CE /* PodcastTester.m in Sources */,
+				208EA41116EA24AC00AF06CE /* PodcastViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

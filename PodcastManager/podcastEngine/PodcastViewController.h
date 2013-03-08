@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  PodcastViewController.h
 //  PodcastManager
 //
 //  Created by Ivan Trifonov on 08.03.13.
@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
--(IBAction) buttonPressed;
+@interface PodcastViewController : UITableViewController
+{
+    NSMutableDictionary *podcastsInfo;
+}
 @end

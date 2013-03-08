@@ -19,10 +19,12 @@
     AVAudioPlayer *filePlayer;
     NSDictionary *podcastsDict;
     BOOL local,down;
+    NSMutableArray *testers;
 }
 
 + (PodcastEngine *) sharedEngine;
 
+- (NSArray*) availablePodcasts;
 - (void) testPodcastForAvailability:(NSString*) podcast target:(id)target method:(SEL)method;
 - (double) podcastLocalLength:(NSString*) podcast;
 - (BOOL) startPlayingPodcast:(NSString*) podcast local:(BOOL)locally downloading:(BOOL)downloading;

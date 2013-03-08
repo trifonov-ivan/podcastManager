@@ -10,6 +10,7 @@
 #import "SMTimer.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
+#import "PodcastTester.h"
 static PodcastEngine * sharedEngine = nil;
 @implementation PodcastEngine
 
@@ -35,17 +36,38 @@ static PodcastEngine * sharedEngine = nil;
 
 - (void) storeChanges
 {
-    NSLog(@"%@",podcastsDict);
     NSString *pListPath = [[NSBundle mainBundle] pathForResource:@"podcasts" ofType:@"plist"];
     NSData *data = [NSPropertyListSerialization dataWithPropertyList:podcastsDict format:NSPropertyListXMLFormat_v1_0 options:0 error:nil];
-//    [data writeToFile:pListPath atomically:YES];
+    [data writeToFile:pListPath atomically:YES];
 }
 
 - (void) testPodcastForAvailability:(NSString*) podcast target:(id)target method:(SEL)method
 {
-    if (!podcastsDict[podcast])
-        return;
+    NSURL *url = [NSURL URLWithString:podcastsDict[podcast][@"remote"]];
+    NSError *err = nil;
+    
+    MPMoviePlayerController * pl = [[MPMoviePlayerController alloc] initWithContentURL:url];
+    if (!testers)
+        testers = [NSMutableArray new];
+
+    NSDictionary * params = @{
+                              @"target":target,
+                              @"method":[NSValue valueWithPointer:method],
+                              @"player":pl? pl : [NSNull null],
+                              @"podcast":podcast? podcast : [NSNull null],
+                              @"holder":testers
+                              };
+    
+    PodcastTester *tester = [[PodcastTester alloc] initWithParams:params];
+
+    [testers addObject:tester];
 }
+
+- (NSArray*) availablePodcasts
+{
+    return [podcastsDict allKeys];
+}
+
 - (double) podcastLocalLength:(NSString*) podcast
 {
     if (!podcastsDict[podcast])

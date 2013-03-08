@@ -21,7 +21,10 @@
     } else {
         self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
     }
-    self.window.rootViewController = self.viewController;
+    _navController=[[UINavigationController alloc] init];
+    [_navController pushViewController:_viewController animated:NO];
+    
+    self.window.rootViewController = _navController;
     [self.window makeKeyAndVisible];
     return YES;
 }
