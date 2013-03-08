@@ -23,6 +23,10 @@ static PodcastEngine * sharedEngine = nil;
 	return sharedEngine;
 }
 
+-(void) dealloc
+{
+    NSLog(@"what the duck?!");
+}
 - (id)init
 {
     self = [super init];
@@ -77,9 +81,9 @@ static PodcastEngine * sharedEngine = nil;
 {
     NSDictionary *dict = podcastsDict[podcast];
     return [NSMutableDictionary dictionaryWithDictionary:@{
-             @"name":dict[@"local"][@"name"],
-             @"availability":@0,
-             @"localtime":@(0)
+             @"name":podcast,//dict[@"local"][@"name"],
+             @"availability":@(-1),
+             @"localtime":dict[@"local"][@"duration"]
              }];
 }
 
@@ -195,16 +199,8 @@ bailout:
     if (!podcastsDict[podcast])
         return NO;
 
-    if (streamer)
-    {
-        [streamer stop];
-        streamer = nil;
-    }
-    if (filePlayer)
-    {
-        [filePlayer stop];
-        filePlayer = nil;
-    }
+    [self endCurrentPodcast];
+    
     local = locally;
     down = downloading;
     NSURL *playURL = nil;

@@ -8,6 +8,8 @@
 		<string>http://www.partyvibe.com:8000</string>
 		<key>local</key>
 		<dict>
+			<key>duration</key>
+			<integer>0</integer>
 			<key>name</key>
 			<string>dub</string>
 			<key>limit</key>
@@ -20,6 +22,8 @@
 		<string>http://stream01.noisefm.pl:8000/</string>
 		<key>local</key>
 		<dict>
+			<key>duration</key>
+			<integer>0</integer>
 			<key>name</key>
 			<string>rock</string>
 			<key>limit</key>
@@ -32,6 +36,8 @@
 		<string>http://188.127.226.185/;stream.nsv?45</string>
 		<key>local</key>
 		<dict>
+			<key>duration</key>
+			<integer>0</integer>
 			<key>name</key>
 			<string>piano</string>
 			<key>limit</key>

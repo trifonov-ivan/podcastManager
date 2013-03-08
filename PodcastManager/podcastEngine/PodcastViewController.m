@@ -7,8 +7,8 @@
 //
 
 #import "PodcastViewController.h"
-#import "PodcastEngine.m"
-
+#import "PodcastEngine.h"
+#import "PodcastInfoCell.h"
 @interface PodcastViewController ()
 
 @end
@@ -27,7 +27,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    podcastsInfo = [[NSMutableDictionary alloc] init];
+    for (NSString *name in [[PodcastEngine sharedEngine] availablePodcasts])
+    {
+        podcastsInfo[name]=[[PodcastEngine sharedEngine] getInitialPodcastInfo:name];
+        podcastsInfo[name][@"attempts"] = @3;
+        [[PodcastEngine sharedEngine] testPodcastForAvailability:name target:self method:@selector(testResultsFetched:)];
+    }
+    keysInfo = [[PodcastEngine sharedEngine] availablePodcasts];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -35,6 +43,33 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void) reTest:(NSString*) name
+{
+    [[PodcastEngine sharedEngine] testPodcastForAvailability:name target:self method:@selector(testResultsFetched:)];
+}
+
+-(void) testResultsFetched:(NSDictionary*)data
+{
+    if (![data[@"availability"] intValue])
+    {
+        int att=[podcastsInfo[data[@"name"]][@"attempts"] intValue]-1;
+        if (att)
+        {
+            podcastsInfo[data[@"name"]][@"attempts"]=@(att);
+            [self performSelector:@selector(reTest:) withObject:data[@"name"] afterDelay:2];
+            return;
+        }
+    }
+    podcastsInfo[data[@"name"]][@"availability"]=data[@"availability"];
+    PodcastInfoCell *cell = (PodcastInfoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[keysInfo indexOfObject:data[@"name"]] inSection:0]];
+    if (cell)
+        [cell updateAccordingToData:podcastsInfo[data[@"name"]]];
+}
+
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 96;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -57,15 +92,30 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"PodcastCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+        {
+            cell = [PodcastInfoCell cellFromNibNamed:@"PodcastInfoCell_iPhone"];
+        }
+        else
+        {
+            cell = [PodcastInfoCell cellFromNibNamed:@"PodcastInfoCell_iPad"];
+        }
+        
     }
-    
+    [(PodcastInfoCell*)cell setController:self];
+    [(PodcastInfoCell*)cell updateAccordingToData:podcastsInfo[keysInfo[indexPath.row]]];
     // Configure the cell...
     
     return cell;
+}
+
+-(void)playClickedFor:(NSString*)name local:(BOOL)local download:(BOOL)download
+{
+    [[PodcastEngine sharedEngine] startPlayingPodcast:name local:local downloading:download];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PodcastPlayButtonClicked object:name];
 }
 
 /*

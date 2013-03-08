@@ -27,6 +27,7 @@
 
 - (NSArray*) availablePodcasts;
 - (NSMutableDictionary*) getInitialPodcastInfo:(NSString*) podcast;
+- (double) durationOfCurrentPodcast;
 - (void) testPodcastForAvailability:(NSString*) podcast target:(id)target method:(SEL)method;
 - (double) podcastLocalLength:(NSString*) podcast;
 - (BOOL) startPlayingPodcast:(NSString*) podcast local:(BOOL)locally downloading:(BOOL)downloading;
