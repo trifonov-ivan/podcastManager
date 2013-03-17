@@ -37,6 +37,12 @@
 		208EA41516EA2DB000AF06CE /* PodcastInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA41416EA2DB000AF06CE /* PodcastInfoCell.m */; };
 		208EA41916EA2E7500AF06CE /* PodcastInfoCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208EA41816EA2E7500AF06CE /* PodcastInfoCell_iPhone.xib */; };
 		208EA41B16EA2EAC00AF06CE /* PodcastInfoCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208EA41A16EA2EAC00AF06CE /* PodcastInfoCell_iPad.xib */; };
+		20F5510916EB5987004B85F6 /* PodcastTrackInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F5510816EB5987004B85F6 /* PodcastTrackInfoCell.m */; };
+		20F5510C16EB599C004B85F6 /* PodcastInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F5510B16EB599C004B85F6 /* PodcastInfoViewController.m */; };
+		20F5511016EB59CD004B85F6 /* PodcastInfoViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F5510F16EB59CD004B85F6 /* PodcastInfoViewController_iPhone.xib */; };
+		20F5511216EB59DA004B85F6 /* PodcastInfoViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F5511116EB59DA004B85F6 /* PodcastInfoViewController_iPad.xib */; };
+		20F5511416EB59EF004B85F6 /* PodcastTrackInfoCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F5511316EB59EF004B85F6 /* PodcastTrackInfoCell_iPad.xib */; };
+		20F5511616EB59FA004B85F6 /* PodcastTrackInfoCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F5511516EB59FA004B85F6 /* PodcastTrackInfoCell_iPhone.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +90,14 @@
 		208EA41416EA2DB000AF06CE /* PodcastInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastInfoCell.m; sourceTree = "<group>"; };
 		208EA41816EA2E7500AF06CE /* PodcastInfoCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PodcastInfoCell_iPhone.xib; sourceTree = "<group>"; };
 		208EA41A16EA2EAC00AF06CE /* PodcastInfoCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PodcastInfoCell_iPad.xib; sourceTree = "<group>"; };
+		20F5510716EB5987004B85F6 /* PodcastTrackInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastTrackInfoCell.h; sourceTree = "<group>"; };
+		20F5510816EB5987004B85F6 /* PodcastTrackInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastTrackInfoCell.m; sourceTree = "<group>"; };
+		20F5510A16EB599C004B85F6 /* PodcastInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastInfoViewController.h; sourceTree = "<group>"; };
+		20F5510B16EB599C004B85F6 /* PodcastInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastInfoViewController.m; sourceTree = "<group>"; };
+		20F5510F16EB59CD004B85F6 /* PodcastInfoViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PodcastInfoViewController_iPhone.xib; sourceTree = "<group>"; };
+		20F5511116EB59DA004B85F6 /* PodcastInfoViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PodcastInfoViewController_iPad.xib; sourceTree = "<group>"; };
+		20F5511316EB59EF004B85F6 /* PodcastTrackInfoCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PodcastTrackInfoCell_iPad.xib; sourceTree = "<group>"; };
+		20F5511516EB59FA004B85F6 /* PodcastTrackInfoCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PodcastTrackInfoCell_iPhone.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,15 +222,55 @@
 		208EA40D16EA248A00AF06CE /* view controller */ = {
 			isa = PBXGroup;
 			children = (
+				20F5510616EB585C004B85F6 /* PodcastInfoViewController */,
+				20F5510516EB584A004B85F6 /* PodcastViewController */,
+			);
+			name = "view controller";
+			sourceTree = "<group>";
+		};
+		20F5510516EB584A004B85F6 /* PodcastViewController */ = {
+			isa = PBXGroup;
+			children = (
+				20F5510D16EB59AC004B85F6 /* xib */,
 				208EA40E16EA24AC00AF06CE /* PodcastViewController.h */,
 				208EA40F16EA24AC00AF06CE /* PodcastViewController.m */,
-				208EA41016EA24AC00AF06CE /* PodcastViewController_iPhone.xib */,
 				208EA41316EA2DB000AF06CE /* PodcastInfoCell.h */,
 				208EA41416EA2DB000AF06CE /* PodcastInfoCell.m */,
+			);
+			name = PodcastViewController;
+			sourceTree = "<group>";
+		};
+		20F5510616EB585C004B85F6 /* PodcastInfoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				20F5510E16EB59B8004B85F6 /* xib */,
+				20F5510716EB5987004B85F6 /* PodcastTrackInfoCell.h */,
+				20F5510816EB5987004B85F6 /* PodcastTrackInfoCell.m */,
+				20F5510A16EB599C004B85F6 /* PodcastInfoViewController.h */,
+				20F5510B16EB599C004B85F6 /* PodcastInfoViewController.m */,
+			);
+			name = PodcastInfoViewController;
+			sourceTree = "<group>";
+		};
+		20F5510D16EB59AC004B85F6 /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				208EA41016EA24AC00AF06CE /* PodcastViewController_iPhone.xib */,
 				208EA41816EA2E7500AF06CE /* PodcastInfoCell_iPhone.xib */,
 				208EA41A16EA2EAC00AF06CE /* PodcastInfoCell_iPad.xib */,
 			);
-			name = "view controller";
+			name = xib;
+			sourceTree = "<group>";
+		};
+		20F5510E16EB59B8004B85F6 /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				20F5510F16EB59CD004B85F6 /* PodcastInfoViewController_iPhone.xib */,
+				20F5511116EB59DA004B85F6 /* PodcastInfoViewController_iPad.xib */,
+				20F5511316EB59EF004B85F6 /* PodcastTrackInfoCell_iPad.xib */,
+				20F5511516EB59FA004B85F6 /* PodcastTrackInfoCell_iPhone.xib */,
+			);
+			name = xib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,6 +334,10 @@
 				208EA41216EA24AC00AF06CE /* PodcastViewController_iPhone.xib in Resources */,
 				208EA41916EA2E7500AF06CE /* PodcastInfoCell_iPhone.xib in Resources */,
 				208EA41B16EA2EAC00AF06CE /* PodcastInfoCell_iPad.xib in Resources */,
+				20F5511016EB59CD004B85F6 /* PodcastInfoViewController_iPhone.xib in Resources */,
+				20F5511216EB59DA004B85F6 /* PodcastInfoViewController_iPad.xib in Resources */,
+				20F5511416EB59EF004B85F6 /* PodcastTrackInfoCell_iPad.xib in Resources */,
+				20F5511616EB59FA004B85F6 /* PodcastTrackInfoCell_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +360,8 @@
 				208EA40C16EA1C0C00AF06CE /* PodcastTester.m in Sources */,
 				208EA41116EA24AC00AF06CE /* PodcastViewController.m in Sources */,
 				208EA41516EA2DB000AF06CE /* PodcastInfoCell.m in Sources */,
+				20F5510916EB5987004B85F6 /* PodcastTrackInfoCell.m in Sources */,
+				20F5510C16EB599C004B85F6 /* PodcastInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

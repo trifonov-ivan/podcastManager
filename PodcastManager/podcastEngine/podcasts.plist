@@ -12,8 +12,8 @@
 			<integer>0</integer>
 			<key>name</key>
 			<string>dub</string>
-			<key>limit</key>
-			<integer>0</integer>
+			<key>tracks</key>
+			<array/>
 		</dict>
 	</dict>
 	<key>Rock</key>
@@ -26,8 +26,8 @@
 			<integer>0</integer>
 			<key>name</key>
 			<string>rock</string>
-			<key>limit</key>
-			<integer>0</integer>
+			<key>tracks</key>
+			<array/>
 		</dict>
 	</dict>
 	<key>Fortepiano</key>
@@ -40,8 +40,8 @@
 			<integer>0</integer>
 			<key>name</key>
 			<string>piano</string>
-			<key>limit</key>
-			<integer>0</integer>
+			<key>tracks</key>
+			<array/>
 		</dict>
 	</dict>
 </dict>

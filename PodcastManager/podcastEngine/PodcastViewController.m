@@ -24,6 +24,22 @@
     return self;
 }
 
+-(id) initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        // Custom initialization
+        self.view=[[[NSBundle mainBundle] loadNibNamed:@"PodcastViewController_iPhone" owner:self options:nil] objectAtIndex:0];
+    }
+    return self;
+    
+}
+
+-(void) setup
+{
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

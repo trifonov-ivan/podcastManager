@@ -46,12 +46,39 @@ static PodcastEngine * sharedEngine = nil;
         podcastsDict = [NSMutableDictionary dictionaryWithContentsOfFile:filePath];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willDie:) name:UIApplicationWillTerminateNotification object:[UIApplication sharedApplication]];
         
+        [self validateInputData];
+        
         timer = [[SMTimer alloc] init];
         timer.rate = 0.2;
         [timer addListener:self method:@selector(checkDuration:)];
     }
     return self;
 }
+
+
+-(void) validateInputData
+{
+    NSArray *keys = podcastsDict.allKeys;
+    for (NSString *key in keys)
+    {
+        NSMutableArray *tracks = podcastsDict[key][@"local"][@"tracks"];
+        NSMutableArray *toDelete = [NSMutableArray new];
+        for (id num in tracks)
+        {
+            if (![self getSoundForPodcast:key withNumber:[num intValue]])
+            {
+                [toDelete addObject:num];
+            }
+        }
+        for (id num in toDelete)
+        {
+            [tracks removeObject:num];
+        }
+    }
+    
+    [self storeChanges];
+}
+
 
 -(void) willDie:(NSNotification*) ntf
 {
@@ -143,12 +170,14 @@ bailout:
 {
     NSDictionary *dict = podcastsDict[podcast][@"local"];
     NSString *name = dict[@"name"];
-    int limit = [dict[@"limit"] intValue];
-    if (!name || !limit) return nil;
-
+    NSArray *tracks = dict[@"tracks"];
+    if (!name) return nil;
+    
+    if (number < 0 || number >= tracks.count) return nil;
+    
     NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
     NSString *folder = [cachesFolder stringByAppendingPathComponent:@"Podcasts"];
-    NSString *filePath = [folder stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d",name,number]];
+    NSString *filePath = [folder stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%@",name,tracks[number]]];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:filePath isDirectory:nil])
     {
@@ -161,17 +190,22 @@ bailout:
 {
     NSDictionary *dict = podcastsDict[podcast][@"local"];
     NSString *name = dict[@"name"];
-    int limit = [dict[@"limit"] intValue];
-    if (!name || !limit) return nil;
-
-    return [NSURL fileURLWithPath:[self getSoundForPodcast:podcast withNumber:arc4random()%limit]];
+    NSArray *tracks = dict[@"tracks"];
+    if (!name) return nil;
+    
+    return [NSURL fileURLWithPath:[self getSoundForPodcast:podcast withNumber:arc4random()%tracks.count]];
 }
 
 - (NSString*) getFilePathForNextFileForPodcast:(NSString*)podcast
 {
     NSDictionary *dict = podcastsDict[podcast][@"local"];
     NSString *name = dict[@"name"];
-    int limit = [dict[@"limit"] intValue];
+    NSMutableArray *tracks = dict[@"tracks"];
+    int number = 0;
+    if (tracks.count)
+    {
+        number = [[tracks lastObject] intValue] + 1;
+    }
     if (!name) return nil;
     
     NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
@@ -182,20 +216,12 @@ bailout:
         [fileManager createDirectoryAtPath:folder withIntermediateDirectories:NO attributes:nil error:nil];
     }
 
-    int i=0;
-    while (i<limit+1)
-    {
-        NSString *filePath = [folder stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d",name,i]];
+        NSString *filePath = [folder stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d",name,number]];
         if (![fileManager fileExistsAtPath:filePath isDirectory:nil])
         {
-            if (i == limit)
-            {
-                podcastsDict[podcast][@"local"][@"limit"]=@(limit+1);
-            }
+            [tracks addObject:@(number)];
             return filePath;
         }
-        i++;
-    }
     
     return nil;
 }
